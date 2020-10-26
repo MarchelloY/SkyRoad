@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIController : ScoreController
 {
+    [SerializeField] private AudioClip buttonClip;
+    
     public RectTransform text;
 
     public GameObject pauseMenuPanel;
@@ -40,7 +42,18 @@ public class UIController : ScoreController
         {
             //pause key control
             if (Input.GetKeyDown(KeyCode.Escape))
-                Time.timeScale = Time.timeScale.Equals(1) ? 0 : 1;
+            {
+                if (Time.timeScale.Equals(1))
+                {
+                    Time.timeScale = 0;
+                    AudioController.soundAudioSource.PlayOneShot(
+                        buttonClip, PlayerPrefs.GetFloat("volumeSound")/4f);
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                }
+            }
             else if (Input.anyKeyDown) Time.timeScale = 1;
         }
         else
