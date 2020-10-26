@@ -2,6 +2,7 @@
 
 public class SpaceShipController : MonoBehaviour
 {
+    [SerializeField] private AudioClip boomClip;
     public float maxAngleRot = 20;
 
     private void Update()
@@ -20,6 +21,8 @@ public class SpaceShipController : MonoBehaviour
             //remove the asteroid
             Destroy(hit.gameObject);
             Settings.isGameOver = true;
+            Cursor.visible = true;
+            AudioController.soundAudioSource.PlayOneShot(boomClip, AudioController.ValueVolumeSound);
         }
     }
 
