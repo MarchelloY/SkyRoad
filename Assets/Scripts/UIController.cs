@@ -43,7 +43,7 @@ public class UIController : ScoreController
             //pause key control
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (Time.timeScale.Equals(1))
+                if (Mathf.Approximately(1f,Time.timeScale))
                 {
                     Time.timeScale = 0;
                     AudioController.soundAudioSource.PlayOneShot(buttonClip, AudioController.ValueVolumeSound);
@@ -100,7 +100,8 @@ public class UIController : ScoreController
             textAsteroids.text = $"ASTEROIDS: {TestReflection(asteroids)}";
         textHScore.text = $"HIGH SCORE: {hScore}";
     }
-    public static int TestReflection(Score s)
+
+    private static int TestReflection(Score s)
     {
         var fi = typeof(Score).GetField("_value", BindingFlags.Instance | BindingFlags.NonPublic);
         var result = (int) fi.GetValue(s);
