@@ -22,8 +22,7 @@ public class SpaceShipController : MonoBehaviour
             Destroy(hit.gameObject);
             Settings.isGameOver = true;
             Cursor.visible = true;
-            AudioController.soundAudioSource.PlayOneShot(
-                boomClip, PlayerPrefs.GetFloat("volumeSound"));
+            AudioController.soundAudioSource.PlayOneShot(boomClip, AudioController.ValueVolumeSound);
         }
     }
 

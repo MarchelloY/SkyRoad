@@ -46,8 +46,7 @@ public class UIController : ScoreController
                 if (Time.timeScale.Equals(1))
                 {
                     Time.timeScale = 0;
-                    AudioController.soundAudioSource.PlayOneShot(
-                        buttonClip, PlayerPrefs.GetFloat("volumeSound")/4f);
+                    AudioController.soundAudioSource.PlayOneShot(buttonClip, AudioController.ValueVolumeSound);
                 }
                 else
                 {

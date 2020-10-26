@@ -9,8 +9,7 @@ public class AsteroidCollision : ScoreController
         if (!hit.gameObject.CompareTag("Asteroid")) return;
         cScore += 5;
         asteroids++;
-        AudioController.soundAudioSource.PlayOneShot(
-            countClip, PlayerPrefs.GetFloat("volumeSound"));
+        AudioController.soundAudioSource.PlayOneShot(countClip, AudioController.ValueVolumeSound);
         PlayerPrefs.SetInt("allAsteroids", PlayerPrefs.GetInt("allAsteroids") + 1);
     }
 }

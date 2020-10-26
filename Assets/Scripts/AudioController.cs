@@ -4,6 +4,18 @@ using UnityEngine.UI;
 public class AudioController : MonoBehaviour
 {
     public static AudioSource soundAudioSource;
+    public static float ValueVolumeSound
+    {
+        get => PlayerPrefs.GetFloat("volumeSound");
+        private set => PlayerPrefs.SetFloat("volumeSound", value);
+    }
+
+    private static float ValueVolumeMusic
+    {
+        get => PlayerPrefs.GetFloat("volumeMusic");
+        set => PlayerPrefs.SetFloat("volumeMusic", value);
+    }
+
     [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private Scrollbar volumeSoundScrollbar;
     [SerializeField] private Scrollbar volumeMusicScrollbar;
@@ -11,12 +23,10 @@ public class AudioController : MonoBehaviour
     private void Start()
     {
         soundAudioSource = GameObject.Find("Sounds").GetComponent<AudioSource>();
-        var valueSound = PlayerPrefs.GetFloat("volumeSound");
-        var valueMusic = PlayerPrefs.GetFloat("volumeMusic");
-        volumeSoundScrollbar.value = valueSound;
-        volumeMusicScrollbar.value = valueMusic;
-        soundAudioSource.volume = valueSound;
-        musicAudioSource.volume = valueMusic;
+        volumeSoundScrollbar.value = ValueVolumeSound;
+        volumeMusicScrollbar.value = ValueVolumeMusic;
+        soundAudioSource.volume = ValueVolumeSound;
+        musicAudioSource.volume = ValueVolumeMusic;
     }
 
     private void Update()
@@ -30,14 +40,14 @@ public class AudioController : MonoBehaviour
     public void OnSoundChanged()
     {
         var value = volumeSoundScrollbar.value;
-        PlayerPrefs.SetFloat("volumeSound", value);
+        ValueVolumeSound = value;
         soundAudioSource.volume = value;
     }
     
     public void OnMusicChanged()
     {
         var value = volumeMusicScrollbar.value;
-        PlayerPrefs.SetFloat("volumeMusic", value);
+        ValueVolumeMusic = value;
         musicAudioSource.volume = value;
     }
 }
